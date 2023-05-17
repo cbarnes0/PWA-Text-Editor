@@ -26,15 +26,10 @@ export const getDb = async () => {
   console.log("GET from the database");
   try {
     const jateDb = await openDB("jate", 1);
-    console.log("DB: ", jateDb);
     const tx = jateDb.transaction("jate", "readonly");
-    console.log("Transaction: ", tx);
     const store = tx.objectStore("jate");
-    console.log("Store: ", store);
     const request = store.get(1);
-    console.log("Request: ", request);
     const result = await request;
-    console.log("Result: ", result);
     if(!result) {
       console.log("Data not in database");
       return;
