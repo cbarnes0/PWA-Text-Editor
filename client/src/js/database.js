@@ -24,23 +24,15 @@ export const putDb = async (content) => {
 
 export const getDb = async () => {
   console.log("GET from the database");
-  try {
-    const jateDb = await openDB("jate", 1);
-    const tx = jateDb.transaction("jate", "readonly");
-    const store = tx.objectStore("jate");
-    const request = store.get(1);
-    const result = await request;
-    if(!result) {
-      console.log("Data not in database");
-      return;
-    }
-    console.log("result.value", result.value);
-    return result.value;
-
-  } catch(err) {
-    console.log(err);
-    return;
-  }
+  const jateDb = await openDB("jate", 1);
+  const tx = jateDb.transaction("jate", "readonly");
+  const store = tx.objectStore("jate");
+  const request = store.get(1);
+  const result = await request;
+  result 
+  ? console.log("data was retrieved from the DB", result.value)
+  : console.log("data was NOT retrieved from the DB")
+  return result?.value;
 };
 
 initdb();
